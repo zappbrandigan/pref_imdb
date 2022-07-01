@@ -178,7 +178,7 @@ def main():
 
     elif search_type is search_options['id']:
         imdb_id = input("\nEnter IMDb ID: ")
-        if not (re.search("^tt[0-9]", imdb_id) and len(imdb_id) in [9,10]):
+        if not re.search(r"^tt[0-9]{7,8}$", imdb_id):
             print("Invalid ID.")
             sys.exit()
 

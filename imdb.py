@@ -7,7 +7,7 @@ import header
 
 def construct_query(q_data: str, is_title: bool = False) -> dict:
     """
-    Converts request data into required API  query format.
+    Converts request data into required API query format.
 
     :param q_data: value to search (title, or imdb id)
     :param is_title: is a title search (boolean)
@@ -19,7 +19,7 @@ def construct_query(q_data: str, is_title: bool = False) -> dict:
 
 def request_imdb_data(qString: str, url: str, headers: dict) -> dict:
     """
-    Requests data from imdb API url using title or imdb id and converts to dict.
+    Requests data from imdb API url using title or imdb id and returns results as dict.
 
     :param qString: search data (title or imdb id)
     :param url: api specific url
@@ -33,11 +33,12 @@ def request_imdb_data(qString: str, url: str, headers: dict) -> dict:
 
 def request_lang_detection(title: str) -> str:
     """
-    Requests a language detection from API.
+    Requests a language detection from API for given title. Encodes string for URL.
 
     :param title: title of production 
     :returns: language code
     """
+
     payload = f"q={urllib.parse.quote(title)}"
     response = requests.request("POST", header.urls['detect_lang'], data=payload, headers=header.headers_google)
     data = json.loads(response.text)
@@ -46,7 +47,7 @@ def request_lang_detection(title: str) -> str:
 
 def display_search_results(titles: list, display: int = 3) -> str:
     """
-    Displays top hits from title search.
+    Displays top hits from title search. Default number of results is 3.
 
     :param titles: list of titles matching search
     :param display: number of results to display
